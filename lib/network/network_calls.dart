@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'package:redlabeldistrict/models/Categories.dart';
 import 'package:redlabeldistrict/models/Product.dart';
+import 'package:redlabeldistrict/models/Product.dart';
 
 import '../constants.dart';
 import 'connection.dart';

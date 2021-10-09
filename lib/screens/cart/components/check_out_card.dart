@@ -27,6 +27,7 @@ class CheckoutCard extends StatelessWidget {
       for (int i = 0; i < demoCarts.length; i++) {
         double amount = double.parse(demoCarts[i].product.salePrice);
         total = total + amount;
+        total = double.parse((total).toStringAsFixed(2));
       }
     }
   }

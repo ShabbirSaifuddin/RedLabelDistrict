@@ -101,40 +101,30 @@ class _BodyState extends State<Body> {
                         child: DefaultButton(
                           text: "Add To Cart",
                           press: () {
+
+                            /// need to work on this to make sure that each product is getting added into the cart properly
                             if (demoCarts.length != 0) {
                               for (int i = 0; i < demoCarts.length; i++) {
-                                if (demoCarts[i].product.id ==
-                                    widget.product.id) {
-                                  print("number of items : " +
-                                      demoCarts[i].numOfItem.toString());
-                                  demoCarts[i].numOfItem =
-                                      count + demoCarts[i].numOfItem;
-                                  // demoCarts.insert(i, Cart(product: widget.product, numOfItem: count + demoCarts[i].numOfItem));
-                                  // demoCarts.removeAt(i);
-                                  showToast(
-                                      message:
-                                          "Product Added to Cart Successfully");
+                                print("debuging 1");
+                                if (demoCarts[i].product.id == widget.product.id) {
+                                  print("debuging 2");
+                                  print("number of items before : " + demoCarts[i].numOfItem.toString());
+                                  demoCarts[i].numOfItem = count + demoCarts[i].numOfItem;
+                                  print("number of items after : " + demoCarts[i].numOfItem.toString());
+                                  showToast(message: "Product Added to Cart Successfully");
+                                  break;
+                                } else {
+                                  print("debuging 3");
+                                  demoCarts.add(Cart(product: widget.product, numOfItem: count));
+                                  showToast(message: "Product Added to Cart Successfully");
                                   break;
                                 }
                               }
                             } else {
-                              demoCarts.add(Cart(
-                                  product: widget.product, numOfItem: count));
-                              showToast(
-                                  message:
-                                      "Product Added to Cart Successfully");
+                              print("debuging 4");
+                              demoCarts.add(Cart(product: widget.product, numOfItem: count));
+                              showToast(message: "Product Added to Cart Successfully");
                             }
-
-                            // if(demoCarts.contains(widget.product.id))
-                            // {
-                            //   showToast(
-                            //       message: "Product Hai "+widget.product.id.toString());
-                            // }else
-                            // {
-                            //   demoCarts.add(Cart(product: widget.product, numOfItem: count));
-                            //   showToast(
-                            //       message: "Product Added to Cart Successfully");
-                            // }
                           },
                         ),
                       ),

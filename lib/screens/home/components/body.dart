@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:loading_animations/loading_animations.dart';
+import 'package:redlabeldistrict/models/Product.dart';
 import 'package:redlabeldistrict/network/network_calls.dart';
 import 'package:redlabeldistrict/screens/home/components/categories.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -25,21 +29,30 @@ class _BodyState extends State<Body> {
     GetProducts();
   }
 
-  void GetProducts() {
-    NetworkCalls nc = new NetworkCalls();
-    nc.getProducts().then((value) {
-      print("helloi");
-      products = value;
-      for (int i = 0; i < products.length; i++) {
-        print(products[i].id);
-        print(products[i].name);
-        print(products[i].images[0]['src']);
-        print(products[i].categoryId[0]['id']);
-      }
-      setState(() {
-        isLoading = false;
-      });
-    });
+  Future<void> GetProducts() async {
+
+     if(SavedProducts.isEmpty){
+
+       NetworkCalls nc = new NetworkCalls();
+       nc.getProducts().then((value) {
+         print("helloi");
+         products = value;
+         saveProducts(products);
+
+         setState(() {
+           isLoading = false;
+         });
+       });
+     }
+
+     else{
+       print(SavedProducts.length);
+       setState(() {
+         products = SavedProducts;
+         isLoading = false;
+       });
+
+     }
   }
 
   @override

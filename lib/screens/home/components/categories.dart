@@ -33,18 +33,36 @@ class _CategoriesState extends State<Categories> {
   }
 
   void GetCategories() {
-    NetworkCalls nc = new NetworkCalls();
-    nc.getCategories().then((value) {
-      categories = value;
-      for (int i = 0; i < categories.length; i++) {
-        print(categories[i].id);
-        print(categories[i].name);
-        print(categories[i].image);
-      }
+
+
+    if(SavedCategories.isEmpty){
+
+      NetworkCalls nc = new NetworkCalls();
+      nc.getCategories().then((value) {
+        categories = value;
+        saveCategories(categories);
+        for (int i = 0; i < categories.length; i++) {
+          print(categories[i].id);
+          print(categories[i].name);
+          print(categories[i].image);
+        }
+        setState(() {
+          isLoading = false;
+        });
+      });
+    }
+
+    else{
+      print(SavedCategories.length);
       setState(() {
+        categories = SavedCategories;
         isLoading = false;
       });
-    });
+
+    }
+
+
+
   }
 
   @override

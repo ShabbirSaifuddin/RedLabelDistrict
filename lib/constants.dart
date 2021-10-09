@@ -73,3 +73,13 @@ const String PERPAGE2 = "&per_page=15";
 showToast({required String message}) {
   Fluttertoast.showToast(msg: message);
 }
+
+List<dynamic> SavedProducts = [];
+saveProducts(List<dynamic> prod){
+  SavedProducts = prod;
+}
+
+List<dynamic> SavedCategories = [];
+saveCategories(List<dynamic> prod){
+  SavedCategories = prod;
+}
