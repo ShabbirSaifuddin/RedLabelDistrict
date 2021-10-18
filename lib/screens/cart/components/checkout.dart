@@ -1,13 +1,18 @@
-import 'package:dio/dio.dart';
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_paypal/flutter_paypal.dart';
 import 'package:redlabeldistrict/components/custom_surfix_icon.dart';
 import 'package:redlabeldistrict/components/default_button.dart';
+import 'package:redlabeldistrict/components/form_error.dart';
 import 'package:redlabeldistrict/constants.dart';
+import 'package:redlabeldistrict/helper/keyboard.dart';
 import 'package:redlabeldistrict/models/Cart.dart';
 import 'package:redlabeldistrict/models/Order.dart';
+import 'package:redlabeldistrict/models/OrderHistory.dart';
+import 'package:redlabeldistrict/network/network_calls.dart';
 
 import '../../../size_config.dart';
 import 'cart_card.dart';
@@ -22,12 +27,15 @@ class Checkout extends StatefulWidget {
 }
 
 class _CheckoutState extends State<Checkout> {
+  final ScrollController _controllerOne = ScrollController();
+
   int checker = 1;
   String cardNumber = '';
   String expiryDate = '';
   String cardHolderName = '';
   String cvvCode = '';
   bool isCvvFocused = false;
+  double total = 0;
 
   //Form fields
   String email = "";
@@ -70,9 +78,7 @@ class _CheckoutState extends State<Checkout> {
       });
   }
 
-  void makePayment() {}
-
-  void createOrder() {
+  orderCreate() {
     email = Email.text;
     fname = Fname.text;
     lname = Lname.text;
@@ -85,14 +91,17 @@ class _CheckoutState extends State<Checkout> {
 
     for (int i = 0; i < demoCarts.length; i++) {
       ListItems.add(Order(
-          productId: demoCarts[i].product.id,
-          numOfItem: demoCarts[i].numOfItem));
+          product_id: demoCarts[i].product.id,
+          quantity: demoCarts[i].numOfItem));
     }
 
-    FormData formData = FormData.fromMap({
+    String JsonProducts = jsonEncode(ListItems);
+    print(JsonProducts);
+
+    String body = jsonEncode({
       "payment_method": "bacs",
       "payment_method_title": "Direct Bank Transfer",
-      "set_paid": true,
+      "set_paid": "true",
       "billing": {
         "first_name": fname,
         "last_name": lname,
@@ -125,14 +134,54 @@ class _CheckoutState extends State<Checkout> {
       ]
     });
 
-    print(formData);
-    print("List Data");
-    print(ListItems);
+    // FormData formData = FormData.fromMap();
+    NetworkCalls nc = new NetworkCalls();
+    nc.createOrder(body).then((value) {
+      final body = json.decode(value);
+
+      String ohAddress = body['shipping']['address_1'] +
+          " " +
+          body['shipping']['address_2'] +
+          " " +
+          body['shipping']['city'] +
+          " " +
+          body['shipping']['state'] +
+          " " +
+          body['shipping']['country'] +
+          " " +
+          body['shipping']['postcode'];
+
+      demoHistory.add(OrderHistory(
+          id: body['id'],
+          date: body['date_created'],
+          amount: body['total'],
+          address: ohAddress,
+          products: ListItems,
+          status: body['status']));
+
+      ListItems.clear();
+      print(ListItems.length);
+      showToast(message: "Your Order has been Successfully Created");
+      FocusScope.of(context).unfocus();
+      Navigator.pop(context);
+    });
+  }
+
+  getTotal() {
+    if (demoCarts.length > 0) {
+      for (int i = 0; i < demoCarts.length; i++) {
+        double amount = double.parse(demoCarts[i].product.salePrice);
+        double count = demoCarts[i].numOfItem.toDouble();
+        total = total + (count * amount);
+        total = double.parse((total).toStringAsFixed(2));
+      }
+    }
   }
 
   @override
   void initState() {
     super.initState();
+    getTotal();
   }
 
   @override
@@ -158,171 +207,197 @@ class _CheckoutState extends State<Checkout> {
           physics: NeverScrollableScrollPhysics(),
           controller: _pageController,
           children: <Widget>[
-            SingleChildScrollView(
-              child: Container(
-                margin: EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    HeadingText("Personal Details"),
-                    SizedBox(
-                      height: getProportionateScreenHeight(20),
-                    ),
-                    buildFnameFormField(),
-                    SizedBox(
-                      height: getProportionateScreenHeight(20),
-                    ),
-                    buildLnameFormField(),
-                    SizedBox(
-                      height: getProportionateScreenHeight(20),
-                    ),
-                    buildEmailFormField(),
-                    SizedBox(
-                      height: getProportionateScreenHeight(20),
-                    ),
-                    buildPnumberFormField(),
-                    SizedBox(
-                      height: getProportionateScreenHeight(40),
-                    ),
-                    DefaultButton(
-                      text: "Next",
-                      press: () {
-                        FocusScope.of(context).unfocus();
-                        if (_pageController.hasClients) {
-                          _pageController.animateToPage(
-                            1,
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeInOut,
-                          );
-                        }
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SingleChildScrollView(
-              child: Container(
-                margin: EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    HeadingText("Shipping Details"),
-                    SizedBox(
-                      height: getProportionateScreenHeight(20),
-                    ),
-                    buildAddressFormField(),
-                    SizedBox(
-                      height: getProportionateScreenHeight(20),
-                    ),
-                    buildCityFormField(),
-                    SizedBox(
-                      height: getProportionateScreenHeight(20),
-                    ),
-                    buildStateFormField(),
-                    SizedBox(
-                      height: getProportionateScreenHeight(20),
-                    ),
-                    buildCountryFormField(),
-                    SizedBox(
-                      height: getProportionateScreenHeight(20),
-                    ),
-                    buildZipFormField(),
-                    SizedBox(
-                      height: getProportionateScreenHeight(40),
-                    ),
-                    DefaultButton(
-                      text: "Next",
-                      press: () {
-                        FocusScope.of(context).unfocus();
-                        if (_pageController.hasClients) {
-                          _pageController.animateToPage(
-                            2,
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeInOut,
-                          );
-                        }
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SingleChildScrollView(
-              child: Container(
-                margin: EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    HeadingText("Bank Details"),
-                    CreditCardWidget(
-                      cardNumber: cardNumber,
-                      expiryDate: expiryDate,
-                      cardHolderName: cardHolderName,
-                      cvvCode: cvvCode,
-                      showBackView: isCvvFocused,
-                      obscureCardNumber: true,
-                      obscureCardCvv: true,
-                      cardBgColor: kPrimaryLightColor,
-                    ),
-                    SingleChildScrollView(
-                      child: Column(
-                        children: <Widget>[
-                          CreditCardForm(
-                            formKey: formKey,
-                            obscureCvv: true,
-                            obscureNumber: true,
-                            cardNumber: cardNumber,
-                            cvvCode: cvvCode,
-                            cardHolderName: cardHolderName,
-                            expiryDate: expiryDate,
-                            cardNumberDecoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Number',
-                              hintText: 'XXXX XXXX XXXX XXXX',
-                            ),
-                            expiryDateDecoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Expired Date',
-                              hintText: 'XX/XX',
-                            ),
-                            cvvCodeDecoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'CVV',
-                              hintText: 'XXX',
-                            ),
-                            cardHolderDecoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Card Holder',
-                            ),
-                            onCreditCardModelChange: onCreditCardModelChange,
-                            themeColor: kPrimaryColor,
-                          ),
-                        ],
+            Form(
+              key: formKey,
+              child: SingleChildScrollView(
+                child: Container(
+                  margin: EdgeInsets.all(10),
+                  child: Column(
+                    children: [
+                      HeadingText("Personal Details"),
+                      SizedBox(
+                        height: getProportionateScreenHeight(20),
                       ),
-                    ),
-                    SizedBox(
-                      height: getProportionateScreenHeight(10),
-                    ),
-                    DefaultButton(
-                      text: "Next",
-                      press: () {
-                        FocusScope.of(context).unfocus();
-                        if (formKey.currentState!.validate()) {
-                          if (_pageController.hasClients) {
-                            _pageController.animateToPage(
-                              3,
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.easeInOut,
-                            );
+                      buildFnameFormField(),
+                      SizedBox(
+                        height: getProportionateScreenHeight(20),
+                      ),
+                      buildLnameFormField(),
+                      SizedBox(
+                        height: getProportionateScreenHeight(20),
+                      ),
+                      buildEmailFormField(),
+                      SizedBox(
+                        height: getProportionateScreenHeight(20),
+                      ),
+                      buildPnumberFormField(),
+                      SizedBox(
+                        height: getProportionateScreenHeight(40),
+                      ),
+                      FormError(errors: errors),
+                      SizedBox(
+                        height: getProportionateScreenHeight(40),
+                      ),
+                      DefaultButton(
+                        text: "Next",
+                        press: () {
+                          if (formKey.currentState!.validate()) {
+                            formKey.currentState!.save();
+                            // if all are valid then go to success screen
+                            KeyboardUtil.hideKeyboard(context);
+                            FocusScope.of(context).unfocus();
+                            if (_pageController.hasClients) {
+                              _pageController.animateToPage(
+                                1,
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeInOut,
+                              );
+                            }
                           }
-                        } else {
-                          print('invalid!');
-                        }
-                      },
-                    ),
-                  ],
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
+            Form(
+              key: formKey,
+              child: SingleChildScrollView(
+                child: Container(
+                  margin: EdgeInsets.all(10),
+                  child: Column(
+                    children: [
+                      HeadingText("Shipping Details"),
+                      SizedBox(
+                        height: getProportionateScreenHeight(20),
+                      ),
+                      buildAddressFormField(),
+                      SizedBox(
+                        height: getProportionateScreenHeight(20),
+                      ),
+                      buildCityFormField(),
+                      SizedBox(
+                        height: getProportionateScreenHeight(20),
+                      ),
+                      buildStateFormField(),
+                      SizedBox(
+                        height: getProportionateScreenHeight(20),
+                      ),
+                      buildCountryFormField(),
+                      SizedBox(
+                        height: getProportionateScreenHeight(20),
+                      ),
+                      buildZipFormField(),
+                      SizedBox(
+                        height: getProportionateScreenHeight(40),
+                      ),
+                      FormError(errors: errors),
+                      SizedBox(
+                        height: getProportionateScreenHeight(40),
+                      ),
+                      DefaultButton(
+                        text: "Next",
+                        press: () {
+                          if (formKey.currentState!.validate()) {
+                            formKey.currentState!.save();
+                            // if all are valid then go to success screen
+                            KeyboardUtil.hideKeyboard(context);
+                            FocusScope.of(context).unfocus();
+                            if (_pageController.hasClients) {
+                              _pageController.animateToPage(
+                                2,
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeInOut,
+                              );
+                            }
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            // SingleChildScrollView(
+            //   child: Container(
+            //     margin: EdgeInsets.all(10),
+            //     child: Column(
+            //       children: [
+            //         HeadingText("Bank Details"),
+            //         CreditCardWidget(
+            //           cardNumber: cardNumber,
+            //           expiryDate: expiryDate,
+            //           cardHolderName: cardHolderName,
+            //           cvvCode: cvvCode,
+            //           showBackView: isCvvFocused,
+            //           obscureCardNumber: true,
+            //           obscureCardCvv: true,
+            //           cardBgColor: kPrimaryLightColor,
+            //         ),
+            //         SingleChildScrollView(
+            //           child: Column(
+            //             children: <Widget>[
+            //               CreditCardForm(
+            //                 formKey: formKey,
+            //                 obscureCvv: true,
+            //                 obscureNumber: true,
+            //                 cardNumber: cardNumber,
+            //                 cvvCode: cvvCode,
+            //                 cardHolderName: cardHolderName,
+            //                 expiryDate: expiryDate,
+            //                 cardNumberDecoration: const InputDecoration(
+            //                   border: OutlineInputBorder(),
+            //                   labelText: 'Number',
+            //                   hintText: 'XXXX XXXX XXXX XXXX',
+            //                 ),
+            //                 expiryDateDecoration: const InputDecoration(
+            //                   border: OutlineInputBorder(),
+            //                   labelText: 'Expired Date',
+            //                   hintText: 'XX/XX',
+            //                 ),
+            //                 cvvCodeDecoration: const InputDecoration(
+            //                   border: OutlineInputBorder(),
+            //                   labelText: 'CVV',
+            //                   hintText: 'XXX',
+            //                 ),
+            //                 cardHolderDecoration: const InputDecoration(
+            //                   border: OutlineInputBorder(),
+            //                   labelText: 'Card Holder',
+            //                 ),
+            //                 onCreditCardModelChange: onCreditCardModelChange,
+            //                 themeColor: kPrimaryColor,
+            //               ),
+            //             ],
+            //           ),
+            //         ),
+            //         SizedBox(
+            //           height: getProportionateScreenHeight(10),
+            //         ),
+            //         DefaultButton(
+            //           text: "Next",
+            //           press: () {
+            //             FocusScope.of(context).unfocus();
+            //             if (formKey.currentState!.validate()) {
+            //               if (_pageController.hasClients) {
+            //                 _pageController.animateToPage(
+            //                   3,
+            //                   duration: const Duration(milliseconds: 300),
+            //                   curve: Curves.easeInOut,
+            //                 );
+            //               }
+            //             } else {
+            //               print('invalid!');
+            //             }
+            //           },
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
             SingleChildScrollView(
+              scrollDirection: Axis.vertical,
               child: Container(
                 margin: EdgeInsets.all(10),
                 child: Column(
@@ -332,8 +407,9 @@ class _CheckoutState extends State<Checkout> {
                       height: getProportionateScreenHeight(200),
                       child: Padding(
                           padding: EdgeInsets.symmetric(
-                              horizontal: getProportionateScreenWidth(20)),
+                              horizontal: getProportionateScreenWidth(10)),
                           child: Scrollbar(
+                            controller: _controllerOne,
                             isAlwaysShown: true,
                             child: ListView.builder(
                               itemCount: demoCarts.length,
@@ -342,28 +418,9 @@ class _CheckoutState extends State<Checkout> {
                                 child: Dismissible(
                                   key: Key(
                                       demoCarts[index].product.id.toString()),
-                                  direction: DismissDirection.endToStart,
-                                  onDismissed: (direction) {
-                                    setState(() {
-                                      demoCarts.removeAt(index);
-                                    });
-                                  },
-                                  background: Container(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 20),
-                                    decoration: BoxDecoration(
-                                      color: Color(0xFFFFE6E6),
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Spacer(),
-                                        SvgPicture.asset(
-                                            "assets/icons/Trash.svg"),
-                                      ],
-                                    ),
-                                  ),
-                                  child: CartCard(cart: demoCarts[index]),
+                                  child: CartCard(
+                                      cart: demoCarts[index], check: 1),
+                                  direction: DismissDirection.none,
                                 ),
                               ),
                             ),
@@ -388,9 +445,9 @@ class _CheckoutState extends State<Checkout> {
                               fontWeight: FontWeight.bold,
                               fontSize: 18),
                         ),
-                        Text(fname + " " + lname),
-                        Text(number),
-                        Text(email),
+                        Text(Fname.text + " " + Lname.text),
+                        Text(Number.text),
+                        Text(Email.text),
                       ],
                     ),
                     SizedBox(
@@ -412,9 +469,13 @@ class _CheckoutState extends State<Checkout> {
                               fontWeight: FontWeight.bold,
                               fontSize: 18),
                         ),
-                        Text(address),
-                        Text(country),
-                        Text(zip),
+                        Text(Address.text),
+                        Text(City.text +
+                            ", " +
+                            State.text +
+                            ", " +
+                            Country.text),
+                        Text(Zip.text),
                       ],
                     ),
                     SizedBox(
@@ -425,32 +486,105 @@ class _CheckoutState extends State<Checkout> {
                       width: double.infinity,
                       color: kTextColor,
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                    // Column(
+                    //   mainAxisAlignment: MainAxisAlignment.start,
+                    //   crossAxisAlignment: CrossAxisAlignment.stretch,
+                    //   children: [
+                    //     Text(
+                    //       "Payment Details",
+                    //       style: TextStyle(
+                    //           fontStyle: FontStyle.normal,
+                    //           fontWeight: FontWeight.bold,
+                    //           fontSize: 18),
+                    //     ),
+                    //     Text(cardNumber),
+                    //     Text(cardHolderName),
+                    //     Text(expiryDate),
+                    //     Text(cvvCode),
+                    //   ],
+                    // ),
+                    SizedBox(
+                      height: getProportionateScreenHeight(50),
+                    ),
+                    Row(
                       children: [
                         Text(
-                          "Payment Details",
+                          "Total: ",
+                          style: TextStyle(
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.normal,
+                              fontSize: 20),
+                        ),
+                        Spacer(),
+                        Text(
+                          "\$$total",
                           style: TextStyle(
                               fontStyle: FontStyle.normal,
                               fontWeight: FontWeight.bold,
-                              fontSize: 18),
+                              fontSize: 20,
+                              color: kPrimaryColor),
                         ),
-                        Text(cardNumber),
-                        Text(cardHolderName),
-                        Text(expiryDate),
-                        Text(cvvCode),
                       ],
                     ),
                     SizedBox(
-                      height: getProportionateScreenHeight(20),
+                      height: getProportionateScreenHeight(10),
                     ),
                     DefaultButton(
-                      text: "Confirm Order",
+                      text: "Proceed To Pay",
                       press: () {
-                        createOrder();
-                        FocusScope.of(context).unfocus();
-                        Navigator.pop(context);
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => UsePaypal(
+                                sandboxMode: true,
+                                clientId:
+                                    "AW1TdvpSGbIM5iP4HJNI5TyTmwpY9Gv9dYw8_8yW5lYIbCqf326vrkrp0ce9TAqjEGMHiV3OqJM_aRT0",
+                                secretKey:
+                                    "EHHtTDjnmTZATYBPiGzZC_AZUfMpMAzj2VZUeqlFUrRJA_C0pQNCxDccB5qoRQSEdcOnnKQhycuOWdP9",
+                                returnURL: "https://samplesite.com/return",
+                                cancelURL: "https://samplesite.com/cancel",
+                                transactions: [
+                                  {
+                                    "amount": {
+                                      "total": total.toString(),
+                                      "currency": "USD",
+                                      "details": {
+                                        "subtotal": total.toString(),
+                                        "shipping": '0',
+                                        "shipping_discount": 0
+                                      }
+                                    },
+                                    "description":
+                                        "Payment for Goods Purchased",
+                                    "payment_options": {
+                                      "allowed_payment_method":
+                                          "INSTANT_FUNDING_SOURCE"
+                                    },
+                                    "item_list": {
+                                      "items": [
+                                        {
+                                          "name": "RedLabelDistrict Products",
+                                          "quantity": 1,
+                                          "price": total.toString(),
+                                          "currency": "USD"
+                                        }
+                                      ],
+                                    }
+                                  }
+                                ],
+                                note:
+                                    "Contact us for any questions on your order.",
+                                onSuccess: (Map params) async {
+                                  print("onSuccess: $params");
+                                  orderCreate();
+                                },
+                                onError: (error) {
+                                  print("onError: $error");
+                                },
+                                onCancel: (params) {
+                                  print('cancelled: $params');
+                                }),
+                          ),
+                        );
                       },
                     ),
                   ],
@@ -571,7 +705,7 @@ class _CheckoutState extends State<Checkout> {
   TextFormField buildPnumberFormField() {
     return TextFormField(
       controller: Number,
-      keyboardType: TextInputType.text,
+      keyboardType: TextInputType.number,
       onSaved: (newValue) {
         setState(() {
           number = newValue!;

@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'package:redlabeldistrict/models/Categories.dart';
 import 'package:redlabeldistrict/models/Product.dart';
-import 'package:redlabeldistrict/models/Product.dart';
 
 import '../constants.dart';
 import 'connection.dart';
@@ -72,32 +71,29 @@ class NetworkCalls {
     }
   }
 
-  Future<List> createOrder(FormData body) async {
+  Future<String> createOrder(String body) async {
     print("Hitting : " + BASE_URL + ORDERS + KEY);
     if (await con.hasNetwork()) {
       try {
-        final response = await http
-            .post(Uri.parse(BASE_URL + ORDERS + KEY), body: body)
-            .timeout(Duration(seconds: 90));
-        if (response.statusCode == 200) {
-          print(response.body);
-
-          product = (json.decode(response.body) as List).map((data) {
-            return Product.fromJSON(data);
-          }).toList();
-
-          print(product.length);
-        }
-        return product;
+        final url = Uri.parse(BASE_URL + ORDERS + KEY);
+        final response = await http.post(
+          url,
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: body,
+        );
+        print(response.body);
+        return response.body;
       } catch (e) {
-        showToast(message: "Error Creating Order");
+        showToast(message: "Error Creating Order 1");
         print(e);
-        return product;
+        return "Error Creating Order";
       }
     } else {
-      showToast(message: "Error Creating Order");
+      showToast(message: "Error Creating Order 2");
       print("Error In API");
-      return product;
+      return "No Internet Connection";
     }
   }
 }

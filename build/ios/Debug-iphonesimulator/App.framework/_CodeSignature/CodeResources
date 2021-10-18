@@ -10,7 +10,7 @@
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		SoAUEsGpUtDa9WmvkA5D0B1yu4M=
+		/ODml8NSximqWkij++8PlCpDJ/U=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -18,7 +18,7 @@
 		</data>
 		<key>flutter_assets/NOTICES.Z</key>
 		<data>
-		p6kl1M6JAVK8BmhEOCFqAZu4CR4=
+		emtndh1km/oobQHMpWSi8KcOF6k=
 		</data>
 		<key>flutter_assets/assets/fonts/muli/Muli-Bold.ttf</key>
 		<data>
@@ -280,6 +280,14 @@
 		<data>
 		8SBHfIiZh1Ts4/JDeHsfw4TMeY8=
 		</data>
+		<key>flutter_assets/assets/images/emptycart.png</key>
+		<data>
+		EZvIN338qk1zDaWuJkDAfBG1dxM=
+		</data>
+		<key>flutter_assets/assets/images/emptywishlist.png</key>
+		<data>
+		4a/4iFXruO3eVcFTrt3rVdqelYU=
+		</data>
 		<key>flutter_assets/assets/images/fedex-express.png</key>
 		<data>
 		WMnmQzQewgpW3cjq0wCoL+iFY6I=
@@ -382,7 +390,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		2MINaF8Rq7HRgRLtDcLQAC2pnjs=
+		CIxY3w21kXcyPSvr3KK1pJOjQE0=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -488,6 +496,10 @@
 		<data>
 		HQs50swkhGUKEizNysX/ez0DRnc=
 		</data>
+		<key>flutter_assets/packages/flutter_paypal/lib/src/assets/img/cloud_state.png</key>
+		<data>
+		yzbn8ojc9H/RIZNhTYcp7AGpy6c=
+		</data>
 		<key>flutter_assets/packages/fluttertoast/assets/toastify.css</key>
 		<data>
 		HVkEhoid+n6bwOYCwZg4DdmGBHY=
@@ -511,11 +523,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			SoAUEsGpUtDa9WmvkA5D0B1yu4M=
+			/ODml8NSximqWkij++8PlCpDJ/U=
 			</data>
 			<key>hash2</key>
 			<data>
-			QyHsbajEk6qBUqRnzYEFw7FopdFmt19M5Ju+cs657GE=
+			Fu1jNsGvIUhIu4Bw7srLKfXdhTY/lgGLmWfcPVQwGI8=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -533,11 +545,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			p6kl1M6JAVK8BmhEOCFqAZu4CR4=
+			emtndh1km/oobQHMpWSi8KcOF6k=
 			</data>
 			<key>hash2</key>
 			<data>
-			7PJuz1yGp3G4zJYfFIKSeWm4EyXQEYOK328tACmYN00=
+			c00NigxO4J7KfylfReVgj1ZHu4+t5vQ710hYYybyS78=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/fonts/muli/Muli-Bold.ttf</key>
@@ -1255,6 +1267,28 @@
 			LvYN/tXYNgSQv7wO+b8kqUXp6kGTLjEAup4iltMPqj8=
 			</data>
 		</dict>
+		<key>flutter_assets/assets/images/emptycart.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			EZvIN338qk1zDaWuJkDAfBG1dxM=
+			</data>
+			<key>hash2</key>
+			<data>
+			X4Xs0viBThXMz3CliwtLVnhyMUdbFT6X3nlX4L7BKd8=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/images/emptywishlist.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			4a/4iFXruO3eVcFTrt3rVdqelYU=
+			</data>
+			<key>hash2</key>
+			<data>
+			QIbqoaEcfkyp6Y/VhxRZn4nmuMQYPOL7YV0N7TDOrEk=
+			</data>
+		</dict>
 		<key>flutter_assets/assets/images/fedex-express.png</key>
 		<dict>
 			<key>hash</key>
@@ -1534,11 +1568,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			2MINaF8Rq7HRgRLtDcLQAC2pnjs=
+			CIxY3w21kXcyPSvr3KK1pJOjQE0=
 			</data>
 			<key>hash2</key>
 			<data>
-			uTRnfYH3sDINDTvlema498/ZG0pjdG1AKvrxysrIOqY=
+			Hqi3Ahx1aJ1Oj8e8muWG4Cub77p8gU/jqPemhFnfokw=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -1825,6 +1859,17 @@
 			<key>hash2</key>
 			<data>
 			74u9kdMj/vHsQLwEb+HpDfxsMyYZxZ2RKok+uan86h0=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/flutter_paypal/lib/src/assets/img/cloud_state.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			yzbn8ojc9H/RIZNhTYcp7AGpy6c=
+			</data>
+			<key>hash2</key>
+			<data>
+			///pKLQ7XJicaXxF2GhTjhlTaRCjBTrNoxa8wMZ/Sqo=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/fluttertoast/assets/toastify.css</key>

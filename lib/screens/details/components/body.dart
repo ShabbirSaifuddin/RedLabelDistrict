@@ -21,6 +21,7 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   int count = 1;
+  bool check = false;
 
   @override
   Widget build(BuildContext context) {
@@ -101,29 +102,35 @@ class _BodyState extends State<Body> {
                         child: DefaultButton(
                           text: "Add To Cart",
                           press: () {
-
-                            /// need to work on this to make sure that each product is getting added into the cart properly
                             if (demoCarts.length != 0) {
                               for (int i = 0; i < demoCarts.length; i++) {
-                                print("debuging 1");
-                                if (demoCarts[i].product.id == widget.product.id) {
-                                  print("debuging 2");
-                                  print("number of items before : " + demoCarts[i].numOfItem.toString());
-                                  demoCarts[i].numOfItem = count + demoCarts[i].numOfItem;
-                                  print("number of items after : " + demoCarts[i].numOfItem.toString());
-                                  showToast(message: "Product Added to Cart Successfully");
+                                if (demoCarts[i].product.id ==
+                                    widget.product.id) {
+                                  setState(() {
+                                    check = false;
+                                  });
+                                  showToast(
+                                      message: "Product Already Added to Cart");
                                   break;
                                 } else {
-                                  print("debuging 3");
-                                  demoCarts.add(Cart(product: widget.product, numOfItem: count));
-                                  showToast(message: "Product Added to Cart Successfully");
-                                  break;
+                                  setState(() {
+                                    check = true;
+                                  });
                                 }
                               }
+                              if (check == true) {
+                                demoCarts.add(Cart(
+                                    product: widget.product, numOfItem: count));
+                                showToast(
+                                    message:
+                                        "Product Added to Cart Successfully");
+                              }
                             } else {
-                              print("debuging 4");
-                              demoCarts.add(Cart(product: widget.product, numOfItem: count));
-                              showToast(message: "Product Added to Cart Successfully");
+                              demoCarts.add(Cart(
+                                  product: widget.product, numOfItem: count));
+                              showToast(
+                                  message:
+                                      "Product Added to Cart Successfully");
                             }
                           },
                         ),

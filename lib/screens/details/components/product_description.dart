@@ -46,25 +46,24 @@ class _ProductDescriptionState extends State<ProductDescription> {
       for (int i = 0; i < wishList.length; i++) {
         if (wishList[i].product.id == widget.product.id) {
           print("we are here 2");
-
           setState(() {
             background = Color(0xFFFFE6E6);
             icon = Color(0xFFFF4848);
-            isAvailable == true;
+            isAvailable = true;
           });
         } else {
           setState(() {
             print("we are here 3");
             background = Color(0xFFF5F6F9);
             icon = Color(0xFFDBDEE4);
-            isAvailable == false;
+            isAvailable = false;
           });
         }
       }
     } else {
       setState(() {
         print("we are here 4");
-        isAvailable == false;
+        isAvailable = false;
         background = Color(0xFFF5F6F9);
         icon = Color(0xFFDBDEE4);
       });
@@ -98,6 +97,7 @@ class _ProductDescriptionState extends State<ProductDescription> {
             ),
             child: GestureDetector(
               onTap: () {
+                print(isAvailable);
                 if (isAvailable == false) {
                   print("we are here 5");
                   wishList.add(Wishlist(product: widget.product));
@@ -105,8 +105,9 @@ class _ProductDescriptionState extends State<ProductDescription> {
                   setState(() {
                     background = Color(0xFFFFE6E6);
                     icon = Color(0xFFFF4848);
-                    isAvailable == true;
+                    isAvailable = true;
                   });
+                  print(isAvailable);
                 } else if (isAvailable == true) {
                   print("we are here 6");
                   showToast(message: 'Please Remove Product from Wishlist');

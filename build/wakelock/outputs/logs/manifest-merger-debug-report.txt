@@ -1,0 +1,19 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock-0.5.6/android/src/main/AndroidManifest.xml:1:1-57
+INJECTED from /usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock-0.5.6/android/src/main/AndroidManifest.xml:1:1-57
+INJECTED from /usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock-0.5.6/android/src/main/AndroidManifest.xml:1:1-57
+	package
+		ADDED from /usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock-0.5.6/android/src/main/AndroidManifest.xml:1:11-45
+		INJECTED from /usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock-0.5.6/android/src/main/AndroidManifest.xml
+		INJECTED from /usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock-0.5.6/android/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock-0.5.6/android/src/main/AndroidManifest.xml:1:1-57
+uses-sdk
+INJECTED from /usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock-0.5.6/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock-0.5.6/android/src/main/AndroidManifest.xml
+INJECTED from /usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock-0.5.6/android/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock-0.5.6/android/src/main/AndroidManifest.xml
+		ADDED from /usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock-0.5.6/android/src/main/AndroidManifest.xml
+		INJECTED from /usr/local/Caskroom/flutter/2.2.3/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock-0.5.6/android/src/main/AndroidManifest.xml

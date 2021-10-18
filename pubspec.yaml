@@ -41,6 +41,7 @@ dependencies:
   fluttertoast: ^8.0.8 # for showing Toast in the App
   loading_animations: ^2.1.0 # for loading animations
   flutter_html: ^2.1.2 # for showing html descriptions in App
+  flutter_paypal: ^0.0.8 # for paypal payment integration
 
 
 

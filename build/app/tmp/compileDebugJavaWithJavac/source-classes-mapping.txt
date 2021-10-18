@@ -1,0 +1,6 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+com/softapps/redlabeldistrict/MainActivity.java
+ com.softapps.redlabeldistrict.MainActivity
+com/softapps/redlabeldistrict/BuildConfig.java
+ com.softapps.redlabeldistrict.BuildConfig

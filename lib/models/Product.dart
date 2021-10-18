@@ -5,7 +5,6 @@ class Product {
   final List<dynamic> images;
   final bool isFavourite, isSale;
 
-
   Product({
     required this.id,
     required this.categoryId,
@@ -35,7 +34,6 @@ class Product {
       categoryId: json['categories'],
     );
   }
-
 }
 
 // Our demo Products

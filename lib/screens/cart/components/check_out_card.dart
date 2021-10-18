@@ -4,6 +4,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:redlabeldistrict/components/default_button.dart';
 import 'package:redlabeldistrict/models/Cart.dart';
 import 'package:redlabeldistrict/screens/cart/components/voucher.dart';
+import 'package:redlabeldistrict/screens/sign_in/sign_in_screen.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -26,7 +27,8 @@ class CheckoutCard extends StatelessWidget {
     if (demoCarts.length > 0) {
       for (int i = 0; i < demoCarts.length; i++) {
         double amount = double.parse(demoCarts[i].product.salePrice);
-        total = total + amount;
+        double count = demoCarts[i].numOfItem.toDouble();
+        total = total + (count * amount);
         total = double.parse((total).toStringAsFixed(2));
       }
     }
@@ -69,7 +71,15 @@ class CheckoutCard extends StatelessWidget {
                     color: Color(0xFFF5F6F9),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: SvgPicture.asset("assets/icons/receipt.svg"),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SignInScreen()),
+                      );
+                    },
+                    child: SvgPicture.asset("assets/icons/receipt.svg"),
+                  ),
                 ),
                 Spacer(),
                 GestureDetector(

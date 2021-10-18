@@ -1,8 +1,13 @@
 class Order {
-  int productId;
-  int numOfItem;
+  int product_id;
+  int quantity;
 
-  Order({required this.productId, required this.numOfItem});
+  Order({required this.product_id, required this.quantity});
+
+  Map toJson() => {
+        'product_id': product_id,
+        'quantity': quantity,
+      };
 }
 
 // Demo data for our cart

@@ -33,10 +33,7 @@ class _CategoriesState extends State<Categories> {
   }
 
   void GetCategories() {
-
-
-    if(SavedCategories.isEmpty){
-
+    if (SavedCategories.isEmpty) {
       NetworkCalls nc = new NetworkCalls();
       nc.getCategories().then((value) {
         categories = value;
@@ -50,19 +47,13 @@ class _CategoriesState extends State<Categories> {
           isLoading = false;
         });
       });
-    }
-
-    else{
+    } else {
       print(SavedCategories.length);
       setState(() {
         categories = SavedCategories;
         isLoading = false;
       });
-
     }
-
-
-
   }
 
   @override
