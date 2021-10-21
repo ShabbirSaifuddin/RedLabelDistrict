@@ -124,8 +124,10 @@ class CategoryCard extends StatelessWidget {
               // child: Image.network(icon),
               child: CachedNetworkImage(
                 imageUrl: icon,
-                placeholder: (context, url) => Image.asset("assets/images/Logo_b:w.png"),
-                errorWidget: (context, url, error) => Image.asset("assets/images/Logo_b:w.png"),
+                placeholder: (context, url) =>
+                    Image.asset("assets/images/Logo_b:w.png"),
+                errorWidget: (context, url, error) =>
+                    Image.asset("assets/images/Logo_b:w.png"),
               ),
             ),
             SizedBox(height: 5),

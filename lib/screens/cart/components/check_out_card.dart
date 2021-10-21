@@ -3,8 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:redlabeldistrict/components/default_button.dart';
 import 'package:redlabeldistrict/models/Cart.dart';
-import 'package:redlabeldistrict/screens/cart/components/voucher.dart';
-import 'package:redlabeldistrict/screens/sign_in/sign_in_screen.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';

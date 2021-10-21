@@ -13,7 +13,7 @@ class SearchField extends StatelessWidget {
 
   List<dynamic> products = [];
 
-  SearchField(List<dynamic> Products){
+  SearchField(List<dynamic> Products) {
     this.products = Products;
   }
 
@@ -36,7 +36,8 @@ class SearchField extends StatelessWidget {
           clearText();
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SearchScreen(value,products)),
+            MaterialPageRoute(
+                builder: (context) => SearchScreen(value, products)),
           );
         },
         decoration: InputDecoration(

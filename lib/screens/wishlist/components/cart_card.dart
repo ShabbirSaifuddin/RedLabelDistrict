@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:loading_animations/loading_animations.dart';
 import 'package:redlabeldistrict/models/Wishlist.dart';
 
 import '../../../constants.dart';
@@ -31,8 +30,10 @@ class CartCard extends StatelessWidget {
               // child: Image.network(wishlist.product.images[0]['src']),
               child: CachedNetworkImage(
                 imageUrl: wishlist.product.images[0]['src'],
-                placeholder: (context, url) => Image.asset("assets/images/Logo_b:w.png"),
-                errorWidget: (context, url, error) => Image.asset("assets/images/Logo_b:w.png"),
+                placeholder: (context, url) =>
+                    Image.asset("assets/images/Logo_b:w.png"),
+                errorWidget: (context, url, error) =>
+                    Image.asset("assets/images/Logo_b:w.png"),
               ),
             ),
           ),

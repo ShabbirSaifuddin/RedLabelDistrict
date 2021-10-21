@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:loading_animations/loading_animations.dart';
 import 'package:redlabeldistrict/models/Product.dart';
 
 import '../../../constants.dart';
@@ -32,12 +31,13 @@ class _ProductImagesState extends State<ProductImages> {
             child: Hero(
               tag: widget.product.id.toString(),
               // child: Image.network(widget.product.images[0]['src']).,
-                  child: CachedNetworkImage(
-                    imageUrl: widget.product.images[0]['src'],
-                    placeholder: (context, url) => Image.asset("assets/images/Logo_b:w.png"),
-
-                    errorWidget: (context, url, error) => Image.asset("assets/images/Logo_b:w.png"),
-                  ),
+              child: CachedNetworkImage(
+                imageUrl: widget.product.images[0]['src'],
+                placeholder: (context, url) =>
+                    Image.asset("assets/images/Logo_b:w.png"),
+                errorWidget: (context, url, error) =>
+                    Image.asset("assets/images/Logo_b:w.png"),
+              ),
             ),
           ),
         ),

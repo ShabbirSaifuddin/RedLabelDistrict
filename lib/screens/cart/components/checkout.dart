@@ -128,11 +128,7 @@ class _CheckoutState extends State<Checkout> {
       },
       "line_items": ListItems,
       "shipping_lines": [
-        {
-          "method_id": "flat_rate",
-          "method_title": "Flat Rate",
-          "total": "0.00"
-        }
+        {"method_id": "flat_rate", "method_title": "Flat Rate", "total": "0.00"}
       ]
     });
 
@@ -406,203 +402,213 @@ class _CheckoutState extends State<Checkout> {
               scrollDirection: Axis.vertical,
               child: isLoading
                   ? Padding(
-                padding: EdgeInsets.all(getProportionateScreenWidth(20)),
-                child: LoadingRotating.square(
-                  borderColor: kPrimaryColor,
-                ),
-              ):  Container(
-                margin: EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    HeadingText("Order Summary"),
-                    Container(
-                      height: getProportionateScreenHeight(200),
-                      child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: getProportionateScreenWidth(10)),
-                          child: Scrollbar(
-                            controller: _controllerOne,
-                            isAlwaysShown: true,
-                            child: ListView.builder(
-                              itemCount: demoCarts.length,
-                              itemBuilder: (context, index) => Padding(
-                                padding: EdgeInsets.symmetric(vertical: 10),
-                                child: Dismissible(
-                                  key: Key(
-                                      demoCarts[index].product.id.toString()),
-                                  child: CartCard(
-                                      cart: demoCarts[index], check: 1),
-                                  direction: DismissDirection.none,
-                                ),
+                      padding: EdgeInsets.all(getProportionateScreenWidth(20)),
+                      child: LoadingRotating.square(
+                        borderColor: kPrimaryColor,
+                      ),
+                    )
+                  : Container(
+                      margin: EdgeInsets.all(10),
+                      child: Column(
+                        children: [
+                          HeadingText("Order Summary"),
+                          Container(
+                            height: getProportionateScreenHeight(200),
+                            child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal:
+                                        getProportionateScreenWidth(10)),
+                                child: Scrollbar(
+                                  controller: _controllerOne,
+                                  isAlwaysShown: true,
+                                  child: ListView.builder(
+                                    itemCount: demoCarts.length,
+                                    itemBuilder: (context, index) => Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 10),
+                                      child: Dismissible(
+                                        key: Key(demoCarts[index]
+                                            .product
+                                            .id
+                                            .toString()),
+                                        child: CartCard(
+                                            cart: demoCarts[index], check: 1),
+                                        direction: DismissDirection.none,
+                                      ),
+                                    ),
+                                  ),
+                                )),
+                          ),
+                          SizedBox(
+                            height: getProportionateScreenHeight(10),
+                          ),
+                          Container(
+                            height: 1,
+                            width: double.infinity,
+                            color: kTextColor,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Text(
+                                "Personal Details",
+                                style: TextStyle(
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
                               ),
-                            ),
-                          )),
-                    ),
-                    SizedBox(
-                      height: getProportionateScreenHeight(10),
-                    ),
-                    Container(
-                      height: 1,
-                      width: double.infinity,
-                      color: kTextColor,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Text(
-                          "Personal Details",
-                          style: TextStyle(
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18),
-                        ),
-                        Text(Fname.text + " " + Lname.text),
-                        Text(Number.text),
-                        Text(Email.text),
-                      ],
-                    ),
-                    SizedBox(
-                      height: getProportionateScreenHeight(10),
-                    ),
-                    Container(
-                      height: 1,
-                      width: double.infinity,
-                      color: kTextColor,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Text(
-                          "Shipping Details",
-                          style: TextStyle(
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18),
-                        ),
-                        Text(Address.text),
-                        Text(City.text +
-                            ", " +
-                            State.text +
-                            ", " +
-                            Country.text),
-                        Text(Zip.text),
-                      ],
-                    ),
-                    SizedBox(
-                      height: getProportionateScreenHeight(10),
-                    ),
-                    Container(
-                      height: 1,
-                      width: double.infinity,
-                      color: kTextColor,
-                    ),
-                    // Column(
-                    //   mainAxisAlignment: MainAxisAlignment.start,
-                    //   crossAxisAlignment: CrossAxisAlignment.stretch,
-                    //   children: [
-                    //     Text(
-                    //       "Payment Details",
-                    //       style: TextStyle(
-                    //           fontStyle: FontStyle.normal,
-                    //           fontWeight: FontWeight.bold,
-                    //           fontSize: 18),
-                    //     ),
-                    //     Text(cardNumber),
-                    //     Text(cardHolderName),
-                    //     Text(expiryDate),
-                    //     Text(cvvCode),
-                    //   ],
-                    // ),
-                    SizedBox(
-                      height: getProportionateScreenHeight(50),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "Total: ",
-                          style: TextStyle(
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 20),
-                        ),
-                        Spacer(),
-                        Text(
-                          "\$$total",
-                          style: TextStyle(
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: kPrimaryColor),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: getProportionateScreenHeight(10),
-                    ),
-                    DefaultButton(
-                      text: "Proceed To Pay",
-                      press: () {
-                        setState(() {
-                          isLoading = true;
-                        });
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (BuildContext context) => UsePaypal(
-                                sandboxMode: true,
-                                clientId: "AaDUEOYIWJim7CWuPo4df0oEybME1So5SSPNWu-_qAK75Y50esgwyK1k82fLd15nCXqq3BEDy3aFGUPy",
-                                secretKey: "EFa-jpjmCK2Xy9ipiL5-HCMJ4St74CXUQdUS2OQA8atHKE6pZe6jbifLqAgCNd7UB5FwtFJEi5cUqBu0",
-                                returnURL: "https://samplesite.com/return",
-                                cancelURL: "https://samplesite.com/cancel",
-                                transactions: [
-                                  {
-                                    "amount": {
-                                      "total": total.toString(),
-                                      "currency": "USD",
-                                      "details": {
-                                        "subtotal": total.toString(),
-                                        "shipping": '0',
-                                        "shipping_discount": 0
-                                      }
-                                    },
-                                    "description":
-                                        "Payment for Goods Purchased",
-                                    "payment_options": {
-                                      "allowed_payment_method":
-                                          "INSTANT_FUNDING_SOURCE"
-                                    },
-                                    "item_list": {
-                                      "items": [
+                              Text(Fname.text + " " + Lname.text),
+                              Text(Number.text),
+                              Text(Email.text),
+                            ],
+                          ),
+                          SizedBox(
+                            height: getProportionateScreenHeight(10),
+                          ),
+                          Container(
+                            height: 1,
+                            width: double.infinity,
+                            color: kTextColor,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Text(
+                                "Shipping Details",
+                                style: TextStyle(
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                              ),
+                              Text(Address.text),
+                              Text(City.text +
+                                  ", " +
+                                  State.text +
+                                  ", " +
+                                  Country.text),
+                              Text(Zip.text),
+                            ],
+                          ),
+                          SizedBox(
+                            height: getProportionateScreenHeight(10),
+                          ),
+                          Container(
+                            height: 1,
+                            width: double.infinity,
+                            color: kTextColor,
+                          ),
+                          // Column(
+                          //   mainAxisAlignment: MainAxisAlignment.start,
+                          //   crossAxisAlignment: CrossAxisAlignment.stretch,
+                          //   children: [
+                          //     Text(
+                          //       "Payment Details",
+                          //       style: TextStyle(
+                          //           fontStyle: FontStyle.normal,
+                          //           fontWeight: FontWeight.bold,
+                          //           fontSize: 18),
+                          //     ),
+                          //     Text(cardNumber),
+                          //     Text(cardHolderName),
+                          //     Text(expiryDate),
+                          //     Text(cvvCode),
+                          //   ],
+                          // ),
+                          SizedBox(
+                            height: getProportionateScreenHeight(50),
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "Total: ",
+                                style: TextStyle(
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 20),
+                              ),
+                              Spacer(),
+                              Text(
+                                "\$$total",
+                                style: TextStyle(
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    color: kPrimaryColor),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: getProportionateScreenHeight(10),
+                          ),
+                          DefaultButton(
+                            text: "Proceed To Pay",
+                            press: () {
+                              setState(() {
+                                isLoading = true;
+                              });
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) => UsePaypal(
+                                      sandboxMode: true,
+                                      clientId:
+                                          "AaDUEOYIWJim7CWuPo4df0oEybME1So5SSPNWu-_qAK75Y50esgwyK1k82fLd15nCXqq3BEDy3aFGUPy",
+                                      secretKey:
+                                          "EFa-jpjmCK2Xy9ipiL5-HCMJ4St74CXUQdUS2OQA8atHKE6pZe6jbifLqAgCNd7UB5FwtFJEi5cUqBu0",
+                                      returnURL:
+                                          "https://samplesite.com/return",
+                                      cancelURL:
+                                          "https://samplesite.com/cancel",
+                                      transactions: [
                                         {
-                                          "name": "RedLabelDistrict Products",
-                                          "quantity": 1,
-                                          "price": total.toString(),
-                                          "currency": "USD"
+                                          "amount": {
+                                            "total": total.toString(),
+                                            "currency": "USD",
+                                            "details": {
+                                              "subtotal": total.toString(),
+                                              "shipping": '0',
+                                              "shipping_discount": 0
+                                            }
+                                          },
+                                          "description":
+                                              "Payment for Goods Purchased",
+                                          "payment_options": {
+                                            "allowed_payment_method":
+                                                "INSTANT_FUNDING_SOURCE"
+                                          },
+                                          "item_list": {
+                                            "items": [
+                                              {
+                                                "name":
+                                                    "RedLabelDistrict Products",
+                                                "quantity": 1,
+                                                "price": total.toString(),
+                                                "currency": "USD"
+                                              }
+                                            ],
+                                          }
                                         }
                                       ],
-                                    }
-                                  }
-                                ],
-                                note:
-                                    "Contact us for any questions on your order.",
-                                onSuccess: (Map params) async {
-                                  print("onSuccess: $params");
-                                  orderCreate();
-                                },
-                                onError: (error) {
-                                  print("onError: $error");
-                                },
-                                onCancel: (params) {
-                                  print('cancelled: $params');
-                                }),
+                                      note:
+                                          "Contact us for any questions on your order.",
+                                      onSuccess: (Map params) async {
+                                        print("onSuccess: $params");
+                                        orderCreate();
+                                      },
+                                      onError: (error) {
+                                        print("onError: $error");
+                                      },
+                                      onCancel: (params) {
+                                        print('cancelled: $params');
+                                      }),
+                                ),
+                              );
+                            },
                           ),
-                        );
-                      },
+                        ],
+                      ),
                     ),
-                  ],
-                ),
-              ),
             ),
           ],
         ),

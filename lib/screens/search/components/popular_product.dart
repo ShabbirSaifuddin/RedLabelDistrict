@@ -3,7 +3,6 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:redlabeldistrict/components/product_card.dart';
 
 class PopularProducts extends StatelessWidget {
-
   List<dynamic> products = [];
   String search = "";
 
@@ -25,9 +24,9 @@ class PopularProducts extends StatelessWidget {
         mainAxisSpacing: 4.0,
         crossAxisSpacing: 4.0,
         itemBuilder: (BuildContext context, int index) =>
-        products[index].name.contains(search)
-            ? ProductCard(product: products[index])
-            : SizedBox.shrink(),
+            products[index].name.contains(search)
+                ? ProductCard(product: products[index])
+                : SizedBox.shrink(),
       ),
     );
   }

@@ -9,7 +9,7 @@ class HomeHeader extends StatelessWidget {
   // }) : super(key: key);
   List<dynamic> products = [];
 
-  HomeHeader( List<dynamic> Products){
+  HomeHeader(List<dynamic> Products) {
     this.products = Products;
   }
 

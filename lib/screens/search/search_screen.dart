@@ -18,7 +18,7 @@ class SearchScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("You Searched For " + '$text'),
       ),
-      body: Body(products,text),
+      body: Body(products, text),
     );
   }
 }

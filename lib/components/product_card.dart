@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:loading_animations/loading_animations.dart';
 import 'package:redlabeldistrict/models/Product.dart';
 import 'package:redlabeldistrict/screens/details/details_screen.dart';
 
@@ -52,9 +51,10 @@ class ProductCard extends StatelessWidget {
                       // child: Image.network(product.images[0]['src']),
                       child: CachedNetworkImage(
                         imageUrl: product.images[0]['src'],
-                        placeholder: (context, url) => Image.asset("assets/images/Logo_b:w.png"),
-
-                        errorWidget: (context, url, error) => Image.asset("assets/images/Logo_b:w.png"),
+                        placeholder: (context, url) =>
+                            Image.asset("assets/images/Logo_b:w.png"),
+                        errorWidget: (context, url, error) =>
+                            Image.asset("assets/images/Logo_b:w.png"),
                       ),
                     ),
                   ),

@@ -6,6 +6,7 @@ import 'section_title.dart';
 
 class SpecialOffers extends StatelessWidget {
   List<dynamic> products = [];
+
   // const SpecialOffers({
   //   Key? key,
   //
@@ -40,11 +41,9 @@ class SpecialOffers extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            ProductsScreen(54, products)),
+                        builder: (context) => ProductsScreen(54, products)),
                   );
                 },
-
               ),
               SpecialOfferCard(
                 image: "assets/images/Image Banner 2.jpg",
@@ -53,8 +52,7 @@ class SpecialOffers extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            ProductsScreen(63, products)),
+                        builder: (context) => ProductsScreen(63, products)),
                   );
                 },
               ),
@@ -65,8 +63,7 @@ class SpecialOffers extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            ProductsScreen(157, products)),
+                        builder: (context) => ProductsScreen(157, products)),
                   );
                 },
               ),
@@ -77,8 +74,7 @@ class SpecialOffers extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            ProductsScreen(74, products)),
+                        builder: (context) => ProductsScreen(74, products)),
                   );
                 },
               ),
@@ -89,8 +85,7 @@ class SpecialOffers extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            ProductsScreen(66, products)),
+                        builder: (context) => ProductsScreen(66, products)),
                   );
                 },
               ),
