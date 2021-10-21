@@ -42,6 +42,7 @@ dependencies:
   loading_animations: ^2.1.0 # for loading animations
   flutter_html: ^2.1.2 # for showing html descriptions in App
   flutter_paypal: ^0.0.8 # for paypal payment integration
+  cached_network_image: ^3.1.0 # for showing default image when orignal is loading
 
 
 

@@ -71,26 +71,18 @@ class CheckoutCard extends StatelessWidget {
                     color: Color(0xFFF5F6F9),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SignInScreen()),
-                      );
-                    },
-                    child: SvgPicture.asset("assets/icons/receipt.svg"),
-                  ),
+                  child: SvgPicture.asset("assets/icons/receipt.svg"),
                 ),
                 Spacer(),
-                GestureDetector(
-                  onTap: () => showBarModalBottomSheet(
-                    expand: false,
-                    context: context,
-                    backgroundColor: Colors.transparent,
-                    builder: (context) => ModalInsideModal(),
-                  ),
-                  child: Text("Add voucher code"),
-                ),
+                // GestureDetector(
+                //   onTap: () => showBarModalBottomSheet(
+                //     expand: false,
+                //     context: context,
+                //     backgroundColor: Colors.transparent,
+                //     builder: (context) => ModalInsideModal(),
+                //   ),
+                //   child: Text("Add voucher code"),
+                // ),
                 const SizedBox(width: 10),
                 Icon(
                   Icons.arrow_forward_ios,

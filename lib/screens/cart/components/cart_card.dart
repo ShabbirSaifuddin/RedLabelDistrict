@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animations/loading_animations.dart';
 import 'package:redlabeldistrict/models/Cart.dart';
 
 import '../../../constants.dart';
@@ -43,7 +45,12 @@ class _CartCardState extends State<CartCard> {
                 color: Color(0xFFF5F6F9),
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: Image.network(widget.cart.product.images[0]['src']),
+              // child: Image.network(widget.cart.product.images[0]['src']),
+              child: CachedNetworkImage(
+                imageUrl: widget.cart.product.images[0]['src'],
+                placeholder: (context, url) => Image.asset("assets/images/Logo_b:w.png"),
+                errorWidget: (context, url, error) => Image.asset("assets/images/Logo_b:w.png"),
+              ),
             ),
           ),
         ),

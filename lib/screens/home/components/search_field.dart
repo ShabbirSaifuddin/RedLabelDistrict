@@ -7,9 +7,15 @@ import '../../../size_config.dart';
 class SearchField extends StatelessWidget {
   final fieldText = TextEditingController();
 
-  SearchField({
-    Key? key,
-  }) : super(key: key);
+  // SearchField({
+  //   Key? key,
+  // }) : super(key: key);
+
+  List<dynamic> products = [];
+
+  SearchField(List<dynamic> Products){
+    this.products = Products;
+  }
 
   void clearText() {
     fieldText.clear();
@@ -30,7 +36,7 @@ class SearchField extends StatelessWidget {
           clearText();
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SearchScreen(value)),
+            MaterialPageRoute(builder: (context) => SearchScreen(value,products)),
           );
         },
         decoration: InputDecoration(

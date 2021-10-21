@@ -60,11 +60,11 @@ class _BodyState extends State<Body> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  HomeHeader(),
+                  HomeHeader(products),
                   SizedBox(height: getProportionateScreenWidth(10)),
                   DiscountBanner(),
                   Categories(products),
-                  SpecialOffers(),
+                  SpecialOffers(products),
                   // SizedBox(height: getProportionateScreenWidth(30)),
                   PopularProducts(products),
                   SizedBox(height: getProportionateScreenWidth(30)),

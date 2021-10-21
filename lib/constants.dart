@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:redlabeldistrict/size_config.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 const kPrimaryColor = Color(0xFF9E701E);
 const kPrimaryLightColor = Color(0xFFFFDFA6);
@@ -58,8 +61,7 @@ OutlineInputBorder outlineInputBorder() {
 // API constants
 
 const String BASE_URL = "https://www.redlabeldistrict.com/wp-json/wc/v3/";
-const String KEY =
-    "?consumer_key=ck_083bbae5611b944393ea50f6fe13bb2b64f65e15&consumer_secret=cs_56fa133e800048bcda80aa56f8001b092bd33ea3";
+const String KEY = "?consumer_key=ck_083bbae5611b944393ea50f6fe13bb2b64f65e15&consumer_secret=cs_56fa133e800048bcda80aa56f8001b092bd33ea3";
 const String CATEGORIES = "products/categories";
 const String PRODUCTS = "products";
 const String ORDERS = "orders";

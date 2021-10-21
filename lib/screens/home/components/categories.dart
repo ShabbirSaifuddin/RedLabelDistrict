@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animations/loading_animations.dart';
 import 'package:redlabeldistrict/network/network_calls.dart';
@@ -120,7 +121,12 @@ class CategoryCard extends StatelessWidget {
                 color: kPrimaryLightColor,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Image.network(icon),
+              // child: Image.network(icon),
+              child: CachedNetworkImage(
+                imageUrl: icon,
+                placeholder: (context, url) => Image.asset("assets/images/Logo_b:w.png"),
+                errorWidget: (context, url, error) => Image.asset("assets/images/Logo_b:w.png"),
+              ),
             ),
             SizedBox(height: 5),
             Text(text, textAlign: TextAlign.center)

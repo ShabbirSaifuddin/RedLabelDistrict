@@ -5,9 +5,15 @@ import '../../../size_config.dart';
 import 'section_title.dart';
 
 class SpecialOffers extends StatelessWidget {
-  const SpecialOffers({
-    Key? key,
-  }) : super(key: key);
+  List<dynamic> products = [];
+  // const SpecialOffers({
+  //   Key? key,
+  //
+  // }) : super(key: key);
+
+  SpecialOffers(List<dynamic> product) {
+    this.products = product;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,32 +36,63 @@ class SpecialOffers extends StatelessWidget {
               SpecialOfferCard(
                 image: "assets/images/Image Banner 1.jpg",
                 category: "Clothing",
-                press: () =>
-                    Navigator.pushNamed(context, ProductsScreen.routeName),
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            ProductsScreen(54, products)),
+                  );
+                },
+
               ),
               SpecialOfferCard(
                 image: "assets/images/Image Banner 2.jpg",
                 category: "Electronics",
-                press: () =>
-                    Navigator.pushNamed(context, ProductsScreen.routeName),
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            ProductsScreen(63, products)),
+                  );
+                },
               ),
               SpecialOfferCard(
                 image: "assets/images/Image Banner 3.jpg",
                 category: "Shoes",
-                press: () =>
-                    Navigator.pushNamed(context, ProductsScreen.routeName),
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            ProductsScreen(157, products)),
+                  );
+                },
               ),
               SpecialOfferCard(
                 image: "assets/images/Image Banner 4.jpg",
                 category: "Furniture",
-                press: () =>
-                    Navigator.pushNamed(context, ProductsScreen.routeName),
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            ProductsScreen(74, products)),
+                  );
+                },
               ),
               SpecialOfferCard(
                 image: "assets/images/Image Banner 5.jpg",
                 category: "Fashion",
-                press: () =>
-                    Navigator.pushNamed(context, ProductsScreen.routeName),
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            ProductsScreen(66, products)),
+                  );
+                },
               ),
               SizedBox(width: getProportionateScreenWidth(20)),
             ],

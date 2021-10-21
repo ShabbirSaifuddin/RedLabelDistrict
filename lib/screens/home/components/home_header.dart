@@ -4,9 +4,14 @@ import '../../../size_config.dart';
 import 'search_field.dart';
 
 class HomeHeader extends StatelessWidget {
-  const HomeHeader({
-    Key? key,
-  }) : super(key: key);
+  // const HomeHeader({
+  //   Key? key,
+  // }) : super(key: key);
+  List<dynamic> products = [];
+
+  HomeHeader( List<dynamic> Products){
+    this.products = Products;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +32,7 @@ class HomeHeader extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                SearchField(),
+                SearchField(products),
               ],
             ),
           ),

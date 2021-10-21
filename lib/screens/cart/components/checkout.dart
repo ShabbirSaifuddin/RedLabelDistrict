@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_paypal/flutter_paypal.dart';
+import 'package:loading_animations/loading_animations.dart';
 import 'package:redlabeldistrict/components/custom_surfix_icon.dart';
 import 'package:redlabeldistrict/components/default_button.dart';
 import 'package:redlabeldistrict/components/form_error.dart';
@@ -36,6 +37,7 @@ class _CheckoutState extends State<Checkout> {
   String cvvCode = '';
   bool isCvvFocused = false;
   double total = 0;
+  bool isLoading = false;
 
   //Form fields
   String email = "";
@@ -129,7 +131,7 @@ class _CheckoutState extends State<Checkout> {
         {
           "method_id": "flat_rate",
           "method_title": "Flat Rate",
-          "total": "10.00"
+          "total": "0.00"
         }
       ]
     });
@@ -162,6 +164,11 @@ class _CheckoutState extends State<Checkout> {
       ListItems.clear();
       print(ListItems.length);
       showToast(message: "Your Order has been Successfully Created");
+      setState(() {
+        isLoading = false;
+        demoCarts.clear();
+      });
+
       FocusScope.of(context).unfocus();
       Navigator.pop(context);
     });
@@ -319,7 +326,6 @@ class _CheckoutState extends State<Checkout> {
                 ),
               ),
             ),
-
             // SingleChildScrollView(
             //   child: Container(
             //     margin: EdgeInsets.all(10),
@@ -398,7 +404,13 @@ class _CheckoutState extends State<Checkout> {
             // ),
             SingleChildScrollView(
               scrollDirection: Axis.vertical,
-              child: Container(
+              child: isLoading
+                  ? Padding(
+                padding: EdgeInsets.all(getProportionateScreenWidth(20)),
+                child: LoadingRotating.square(
+                  borderColor: kPrimaryColor,
+                ),
+              ):  Container(
                 margin: EdgeInsets.all(10),
                 child: Column(
                   children: [
@@ -532,14 +544,15 @@ class _CheckoutState extends State<Checkout> {
                     DefaultButton(
                       text: "Proceed To Pay",
                       press: () {
+                        setState(() {
+                          isLoading = true;
+                        });
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (BuildContext context) => UsePaypal(
                                 sandboxMode: true,
-                                clientId:
-                                    "AW1TdvpSGbIM5iP4HJNI5TyTmwpY9Gv9dYw8_8yW5lYIbCqf326vrkrp0ce9TAqjEGMHiV3OqJM_aRT0",
-                                secretKey:
-                                    "EHHtTDjnmTZATYBPiGzZC_AZUfMpMAzj2VZUeqlFUrRJA_C0pQNCxDccB5qoRQSEdcOnnKQhycuOWdP9",
+                                clientId: "AaDUEOYIWJim7CWuPo4df0oEybME1So5SSPNWu-_qAK75Y50esgwyK1k82fLd15nCXqq3BEDy3aFGUPy",
+                                secretKey: "EFa-jpjmCK2Xy9ipiL5-HCMJ4St74CXUQdUS2OQA8atHKE6pZe6jbifLqAgCNd7UB5FwtFJEi5cUqBu0",
                                 returnURL: "https://samplesite.com/return",
                                 cancelURL: "https://samplesite.com/cancel",
                                 transactions: [

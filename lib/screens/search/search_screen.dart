@@ -5,9 +5,11 @@ import 'components/body.dart';
 class SearchScreen extends StatelessWidget {
   static String routeName = "/search";
   late String text = "";
+  List<dynamic> products = [];
 
-  SearchScreen(String text) {
+  SearchScreen(String text, List<dynamic> Products) {
     this.text = text;
+    this.products = Products;
   }
 
   @override
@@ -16,7 +18,7 @@ class SearchScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("You Searched For " + '$text'),
       ),
-      body: Body(),
+      body: Body(products,text),
     );
   }
 }
