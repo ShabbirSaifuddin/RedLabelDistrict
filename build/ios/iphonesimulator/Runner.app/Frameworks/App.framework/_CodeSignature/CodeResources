@@ -10,7 +10,7 @@
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		/ODml8NSximqWkij++8PlCpDJ/U=
+		vxtafcgOJZnZUmPgjtExXTNvrDE=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -18,7 +18,7 @@
 		</data>
 		<key>flutter_assets/NOTICES.Z</key>
 		<data>
-		emtndh1km/oobQHMpWSi8KcOF6k=
+		JN+n8qI77EFnoKaXPj/+5BvyhdU=
 		</data>
 		<key>flutter_assets/assets/fonts/muli/Muli-Bold.ttf</key>
 		<data>
@@ -31,6 +31,10 @@
 		<key>flutter_assets/assets/fonts/muli/Muli.ttf</key>
 		<data>
 		qi7fd9hv/4J5C4RpF3coN4KOSQI=
+		</data>
+		<key>flutter_assets/assets/icons/.DS_Store</key>
+		<data>
+		xKhYCOX6PUMjAatUOtq7vfrGgYE=
 		</data>
 		<key>flutter_assets/assets/icons/Back%20ICon.svg</key>
 		<data>
@@ -390,7 +394,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		4aZxLC+Pn3A5d0BYPIOwvmHy3o4=
+		ZgBGh7NJWV4lVQdq4KzuchiMETA=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -523,11 +527,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			/ODml8NSximqWkij++8PlCpDJ/U=
+			vxtafcgOJZnZUmPgjtExXTNvrDE=
 			</data>
 			<key>hash2</key>
 			<data>
-			Fu1jNsGvIUhIu4Bw7srLKfXdhTY/lgGLmWfcPVQwGI8=
+			/6OmY7e3ukEvcMB6xnqvHEDSF6HHCIlKek87plNlWB8=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -545,11 +549,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			emtndh1km/oobQHMpWSi8KcOF6k=
+			JN+n8qI77EFnoKaXPj/+5BvyhdU=
 			</data>
 			<key>hash2</key>
 			<data>
-			c00NigxO4J7KfylfReVgj1ZHu4+t5vQ710hYYybyS78=
+			RsGbh1TVOYscjVo/4pcC1tfl6E6eCB1tvHzOLbhwL8o=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/fonts/muli/Muli-Bold.ttf</key>
@@ -1568,11 +1572,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			4aZxLC+Pn3A5d0BYPIOwvmHy3o4=
+			ZgBGh7NJWV4lVQdq4KzuchiMETA=
 			</data>
 			<key>hash2</key>
 			<data>
-			ZRTtdDQOlB3jt5npLYQle/5mQv/8T2OadC38ATmtNiE=
+			d778Y6hervBH0AvG3Rp0POoWS00Arqhlj6gt/+PtlUk=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
